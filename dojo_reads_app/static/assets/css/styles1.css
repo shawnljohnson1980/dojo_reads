@@ -1,0 +1,46 @@
+div {
+}
+
+.col-xl-5 {
+}
+
+.extend {
+  overflow: scroll;
+  max-height: 400px;
+}
+
+.form-control.re-size {
+  width: 75px;
+}
+
+.form-control.re-size2 {
+  width: 800px;
+  margin-left: 253px;
+}
+
+.form-group.re-size2 {
+}
+
+.re-size2 {
+  width: 800px;
+}
+
+.re-size {
+  width: 200px;
+}
+
+.custom-select.re-size2 {
+  margin-left: 9px;
+}
+
+.form-control.re-size-3 {
+}
+
+.form-control.re-size-3 {
+  width: 950px;
+}
+
+.form-control.re-size4 {
+  width: 800px;
+}
+

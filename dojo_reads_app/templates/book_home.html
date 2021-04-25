@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Book Home</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/styles1.css' %}">
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-md text-white bg-info shadow">
+        <div class="container-fluid"><a class="navbar-brand text-white" href="#">Dojo Reads</a><button
+                data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle
+                    navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav">
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                </ul>
+            </div><a class="text-white mr-5" href="/dojo_reads/books/new">Add Book and Review</a><a class="text-white"
+                href="/log-out">Logout</a>
+        </div>
+    </nav>
+    <h2 class="text-info mt-3 ml-4">Welcome, {{ user.first_name }}</h2>
+    <section></section>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col border border-rounded">
+                <h5 class="text-info" style="border-bottom-style: solid;">Recent Book reviews:</h5>
+                <p class="mt-5">{{ book.title }}</p>
+                <p>{{ author.full_name}}</p>
+                <p>{{ book.rating}}</p>
+                <p>{{ review.creator.first_name}} , {{ book.review.creator.last_name }}</p>
+                <p>{{ book.review}}</p>
+            </div>
+            <div class="col-xl-5 order-4 border border-rounded"> {% for book in books %}
+                <h5 class="text-info" style="border-bottom-style: solid;">Other Books with reviews:</h5>
+                <div class="border rounded border-dark shadow extend"><a class="book stretched-link ml-3 mt-3"
+                        href="{{ book.id }}">{{ book.title }}&nbsp; &nbsp; </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+</body>
+
+</html>
