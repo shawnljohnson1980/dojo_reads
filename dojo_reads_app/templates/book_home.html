@@ -21,7 +21,7 @@
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
                 </ul>
-            </div><a class="text-white mr-5" href="/dojo_reads/books/new">Add Book and Review</a><a class="text-white"
+            </div><a class="text-white mr-5" href="dojo_reads/books/new">Add Book and Review</a><a class="text-white"
                 href="/log-out">Logout</a>
         </div>
     </nav>
@@ -31,18 +31,21 @@
         <div class="row">
             <div class="col border border-rounded">
                 <h5 class="text-info" style="border-bottom-style: solid;">Recent Book reviews:</h5>
+                {% for book in books.all %}
                 <p class="mt-5">{{ book.title }}</p>
                 <p>{{ author.full_name}}</p>
-                <p>{{ book.rating}}</p>
-                <p>{{ review.creator.first_name}} , {{ book.review.creator.last_name }}</p>
-                <p>{{ book.review}}</p>
+                <p>{{ book.rating.rating}}</p>
+                <p>{{ book.rating.review.creator.first_name}} , {{ book.rating.review.creator.last_name }}</p>
+                <p>{{ book.rating.review}}</p>
             </div>
-            <div class="col-xl-5 order-4 border border-rounded"> {% for book in books %}
+            {% endfor %}
+
+            <div class="col-xl-5 order-4 border border-rounded">
                 <h5 class="text-info" style="border-bottom-style: solid;">Other Books with reviews:</h5>
                 <div class="border rounded border-dark shadow extend"><a class="book stretched-link ml-3 mt-3"
                         href="{{ book.id }}">{{ book.title }}&nbsp; &nbsp; </a>
                 </div>
-                {% endfor %}
+
             </div>
         </div>
     </div>

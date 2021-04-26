@@ -10,6 +10,8 @@ class BookManager(models.Manager):
         errors={}
         if len(post_data['title']) < 3 or len(post_data['title']) > 65:
             errors['title_length']="title must be between 3 and 65 Characters in length"
+        if post_data['title']== post_data['title']:
+            errors['title_unique']="Book already in the library"
         return errors
 
 class RatingManager(models.Manager):
@@ -30,9 +32,9 @@ class AuthorManager(models.Manager):
 
 
 class Rating(models.Model):
-    rating = forms.IntegerField(widget=Stars)
+    rating = models.IntegerField()
     review=models.TextField()
-    creator=models.ForeignKey(User,related_name='user_reviews',on_delete=models.CASCADE)
+    creator=models.ForeignKey(User,related_name='user_rating',on_delete=models.CASCADE)
     created_at= models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
     objects=RatingManager()
@@ -47,7 +49,7 @@ class Book(models.Model):
     title=models.CharField(max_length=65)
     creator=models.ForeignKey(User,related_name='reviews',on_delete=models.CASCADE)
     author=models.ForeignKey(Author,related_name='books',on_delete=models.CASCADE)
-    rating=models.ForeignKey(Rating,related_name='ratings',on_delete=models.CASCADE)
+    rating=models.ManyToManyField(Rating,related_name='ratings', blank=True)
     created_at= models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
     objects= BookManager()

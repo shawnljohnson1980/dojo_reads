@@ -36,23 +36,28 @@
                             Title:</label><input
                             class="border rounded border-dark shadow form-control d-inline-block re-size-3 ml-4"
                             type="text" name="title" placeholder="Your Book title " required="True"></div>
-                    <div class="form-group"><label class="d-block" style="font-weight: bold;">Author:</label>
-                        {% for author in authors %}
-                        <p class="d-inline-block re-size ml-5" style="font-weight: 500;">Select from the list&nbsp;</p>
-                        <select class="border rounded border-dark shadow custom-select d-inline-block re-size2"
-                            name="author" value="full_name">
-                            <optgroup label="Authors">
-                                <option value="null">Choose</option>
-                                <option value="{{ author.id }}">{{ author.full_name }}</option>
-                            </optgroup>
-                        </select>
-                        {% endfor %}
-                    </div>
+                    <!-- Author Select -->
                     <div class="form-group">
-                        <p class="d-inline-block re-size ml-5" style="font-weight: 500;">Or add a anew Autho:r</p><input
-                            class="border rounded border-dark shadow form-control d-inline-block re-size4 ml-2"
-                            type="text" placeholder="add a new author" name="full_name" value="author" required="True">
+                        <label class="d-block" style="font-weight: bold;">Author:</label>
+
+                        <p class="d-inline-block re-size ml-5 " style="font-weight: 500;">Select
+                            from
+                            the list&nbsp;</p>
+                        <select class="border rounded border-dark shadow custom-select d-inline-block re-size2"
+                            name="author" onchange="myFunction()" id="mySelect" required="true">
+                            <option value="">--Select--</option>
+                            {% for author in authors %}
+                            <option value="{{ author.id }}">{{ author.full_name }}</option>
+                            {% endfor %}
+                            <option value="add">Add new</option>
+                        </select>
                     </div>
+                    <!-- End Author Select -->
+                    <!-- Author Full Name -->
+                    <div class="form-group" id="new_author">
+
+                    </div>
+                    <!-- End Author Full Name -->
                     <div class="form-group"><label class="d-inline-block"
                             style="font-weight: bold;">Review:</label><textarea
                             class="border rounded border-dark shadow form-control re-size2" name="review"
@@ -73,6 +78,22 @@
     <section class=" mb-5"></section>
     <script src="{% static 'assets/js/jquery.min.js' %}"></script>
     <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("mySelect").value;
+            var y = `
+            <p class="d-inline-block re-size ml-5" style="font-weight: 500;">Or add a new Author</p><input
+            class="border rounded border-dark shadow form-control d-inline-block re-size4 ml-2"
+            type="text" placeholder="add a new author" name="full_name" required="true" >
+            `
+            if (x == "add") {
+                document.querySelector("#new_author").innerHTML = y
+            } else {
+                document.querySelector("#new_author").innerHTML = null
+            }
+            console.log(x)
+        }
+    </script>
 </body>
 
 </html>
